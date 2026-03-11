@@ -1,0 +1,32 @@
+<svg width="1200" height="630" viewBox="0 0 1200 630" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <pattern id="dot-grid" x="0" y="0" width="35" height="35" patternUnits="userSpaceOnUse">
+      <circle cx="1.2" cy="1.2" r="1.2" fill="rgba(0,0,0,0.15)" />
+    </pattern>
+  </defs>
+  <rect width="1200" height="630" fill="rgb(247,245,240)" />
+  <rect width="1200" height="630" fill="url(#dot-grid)" />
+  <text
+    x="72"
+    y="112"
+    fill="rgba(28,31,41,0.56)"
+    font-family="'SFMono-Regular', 'SF Mono', Menlo, Consolas, monospace"
+    font-size="22"
+    letter-spacing="5.2"
+  >
+    WHATFLIX
+  </text>
+  <text
+    x="72"
+    y="292"
+    fill="rgb(28,31,41)"
+    font-family="'Funnel Display', Arial, sans-serif"
+    font-size="96"
+    font-weight="600"
+    letter-spacing="-4.5"
+  >
+    <tspan x="72" dy="0">The ultimate</tspan>
+    <tspan x="72" dy="96">movie scrolling</tspan>
+    <tspan x="72" dy="96">platform.</tspan>
+  </text>
+</svg>
