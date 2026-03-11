@@ -8,7 +8,7 @@ interface Props {
 
 const { title, description } = Astro.props;
 const url = Astro.props.url ?? "https://whatflix.ai/";
-const image = new URL(Astro.props.image ?? "/og-image.png", url).href;
+const image = new URL(Astro.props.image ?? "/og-image.svg", url).href;
 ---
 
 <!doctype html>
