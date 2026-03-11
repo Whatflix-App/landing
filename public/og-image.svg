@@ -6,16 +6,6 @@
   </defs>
   <rect width="1200" height="630" fill="rgb(247,245,240)" />
   <rect width="1200" height="630" fill="url(#dot-grid)" />
-  <text
-    x="72"
-    y="555"
-    fill="rgba(28,31,41,0.56)"
-    font-family="'SFMono-Regular', 'SF Mono', Menlo, Consolas, monospace"
-    font-size="22"
-    letter-spacing="5.2"
-  >
-    WHATFLIX
-  </text>
   <g transform="translate(1042 70)" fill="rgb(28,31,41)">
     <rect x="0" y="22" width="64" height="40" rx="12" />
     <rect x="18" y="0" width="28" height="16" rx="8" />
@@ -23,4 +13,17 @@
     <circle cx="46" cy="42" r="8" fill="rgb(247,245,240)" />
     <path d="M64 30L86 18V66L64 54V30Z" />
   </g>
+  <text
+    x="100"
+    y="400"
+    fill="rgb(28,31,41)"
+    font-family="'Funnel Display', Arial, sans-serif"
+    font-size="45"
+    font-weight="600"
+    letter-spacing="-2"
+  >
+    <tspan x="72" dy="0">The ultimate</tspan>
+    <tspan x="72" dy="50">movie scrolling</tspan>
+    <tspan x="72" dy="50">platform.</tspan>
+  </text>
 </svg>
