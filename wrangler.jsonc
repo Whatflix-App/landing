@@ -1,0 +1,14 @@
+{
+  "$schema": "./node_modules/wrangler/config-schema.json",
+  "name": "whatflix-landing",
+  "compatibility_date": "2026-03-10",
+  "pages_build_output_dir": "./dist",
+  "d1_databases": [
+    {
+      "binding": "whatflix_waitlist",
+      "database_name": "whatflix-waitlist",
+      "database_id": "cb40af8f-4760-4bba-8344-3c14680c2430",
+      "remote": true,
+    },
+  ],
+}

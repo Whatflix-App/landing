@@ -29,7 +29,7 @@ import BaseLayout from "../layouts/BaseLayout.astro";
 
   <style>
     .hero {
-      min-height: calc(100vh - 48px);
+      min-height: calc(100dvh - 48px);
       display: grid;
       place-items: start start;
       align-content: start;
@@ -63,7 +63,7 @@ import BaseLayout from "../layouts/BaseLayout.astro";
     .waitlist-wrap {
       display: flex;
       justify-content: center;
-      margin-top: -58vh;
+      margin-top: -50vh;
       padding: 0 20px 48px;
       position: relative;
       z-index: 1;
@@ -117,7 +117,7 @@ import BaseLayout from "../layouts/BaseLayout.astro";
       letter-spacing: 0.12em;
       text-transform: uppercase;
       cursor: pointer;
-      transition: background-color 160ms ease;
+      transition: background-color 160ms ease, opacity 160ms ease;
     }
 
     .waitlist.is-open {
@@ -139,6 +139,15 @@ import BaseLayout from "../layouts/BaseLayout.astro";
       background: #234436;
     }
 
+    .waitlist.is-loading button {
+      opacity: 0.75;
+      cursor: wait;
+    }
+
+    .waitlist.is-success button {
+      background: #234436;
+    }
+
     .sr-only {
       position: absolute;
       width: 1px;
@@ -153,7 +162,7 @@ import BaseLayout from "../layouts/BaseLayout.astro";
 
     @media (max-width: 720px) {
       .hero {
-        min-height: calc(100vh - 32px);
+        min-height: calc(100dvh - 32px);
         padding: 16vh 12px 24px 16px;
       }
 
@@ -190,7 +199,7 @@ import BaseLayout from "../layouts/BaseLayout.astro";
     const button = document.querySelector("[data-waitlist-button]");
 
     if (form instanceof HTMLFormElement && input instanceof HTMLInputElement && button instanceof HTMLButtonElement) {
-      button.addEventListener("click", () => {
+      const submitWaitlist = async () => {
         const isOpen = form.classList.contains("is-open");
 
         if (!isOpen) {
@@ -206,9 +215,39 @@ import BaseLayout from "../layouts/BaseLayout.astro";
           return;
         }
 
-        const subject = encodeURIComponent("Whatflix Waitlist");
-        const body = encodeURIComponent(`Add me to the Whatflix waitlist: ${input.value}`);
-        window.location.href = `mailto:hello@whatflix.app?subject=${subject}&body=${body}`;
+        form.classList.add("is-loading");
+        button.disabled = true;
+
+        try {
+          const response = await fetch("/api/waitlist", {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json"
+            },
+            body: JSON.stringify({
+              email: input.value
+            })
+          });
+
+          if (!response.ok) {
+            const payload = await response.json().catch(() => null);
+            throw new Error(payload?.error ?? "Unable to join waitlist.");
+          }
+
+          form.classList.remove("is-loading", "is-open");
+          form.classList.add("is-success");
+          input.value = "";
+          button.textContent = "Joined";
+        } catch (error) {
+          form.classList.remove("is-loading");
+          button.disabled = false;
+          button.textContent = "Try again";
+          console.error(error);
+        }
+      };
+
+      button.addEventListener("click", () => {
+        void submitWaitlist();
       });
 
       input.addEventListener("keydown", (event) => {
@@ -217,14 +256,7 @@ import BaseLayout from "../layouts/BaseLayout.astro";
         }
 
         event.preventDefault();
-
-        if (!input.reportValidity()) {
-          return;
-        }
-
-        const subject = encodeURIComponent("Whatflix Waitlist");
-        const body = encodeURIComponent(`Add me to the Whatflix waitlist: ${input.value}`);
-        window.location.href = `mailto:hello@whatflix.app?subject=${subject}&body=${body}`;
+        void submitWaitlist();
       });
     }
   </script>

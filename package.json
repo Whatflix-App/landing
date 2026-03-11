@@ -7,9 +7,15 @@
     "dev": "astro dev",
     "start": "astro dev",
     "build": "astro build",
-    "preview": "astro preview"
+    "preview": "astro preview",
+    "pages:dev": "wrangler pages dev dist",
+    "d1:migrate:local": "wrangler d1 migrations apply whatflix_waitlist --local",
+    "d1:migrate:remote": "wrangler d1 migrations apply whatflix_waitlist --remote"
   },
   "dependencies": {
     "astro": "^5.0.0"
+  },
+  "devDependencies": {
+    "wrangler": "^4.20.0"
   }
 }
